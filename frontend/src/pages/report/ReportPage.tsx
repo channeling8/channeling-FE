@@ -69,11 +69,9 @@ export default function ReportPage() {
     const handleUpdateModalClick = () => setIsOpenUpdateModal(!isOpenUpdateModal)
     const handleResetTab = () => setActiveTab(TABS[0])
 
-    if (isPending || !videoData) return null
-
     return (
         <article>
-            <Metadata metaKey={META_KEY.REPORT} vars={{ '영상 제목': videoData.videoTitle }} />
+            {videoData && <Metadata metaKey={META_KEY.REPORT} vars={{ '영상 제목': videoData.videoTitle }} />}
 
             <div className="px-6 tablet:px-[76px] py-10 desktop:py-20 space-y-10">
                 {isPending ? <VideoSummarySkeleton /> : <VideoSummary data={videoData} />}
