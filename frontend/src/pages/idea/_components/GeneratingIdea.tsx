@@ -4,6 +4,7 @@ import Ideatooltip from '../../../assets/icons/ideatootltip.svg?react'
 
 export const GeneratingIdea = () => {
     const [isTooltipOpen, setIsTooltipOpen] = useState(false)
+
     const handleClick = () => {
         setIsTooltipOpen((prev) => !prev)
     }
