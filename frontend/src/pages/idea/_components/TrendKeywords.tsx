@@ -1,5 +1,5 @@
 import { formatRelativeTime } from '../../../utils/format'
-import { TitledSection } from '../../report/_components'
+import { TitledSection } from '../../../components/TitledSection'
 import ScoreUp from '../../../assets/icons/up.svg?react'
 import type { IdeaDataProps, Trend } from '../../../types/report/all'
 
@@ -38,7 +38,7 @@ const KeywordBox = ({ label, items }: { label: string; items: Trend[] }) => {
                 ) : (
                     items.map((item, index) => (
                         <div
-                            key={index}
+                            key={`${item.trendKeywordId}-${index}`}
                             className="grid grid-cols-6 tablet:grid-cols-8 items-center py-4 rounded-lg bg-surface-elevate-l2"
                         >
                             <p

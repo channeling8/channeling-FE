@@ -10,7 +10,7 @@ export default function IdeaPage() {
     return (
         <div>
             <Metadata metaKey={META_KEY.IDEA} />
-            <div className="flex flex-col desktop:py-[80px] py-10 px-[70px] gap-[40px] tablrt:gap-[64px] desktop:gap-[40px] self-stretch items-center">
+            <div className="flex flex-col desktop:py-[80px] py-10 px-[16px] tablet:px-[90px] gap-[40px] tablet:gap-[64px] desktop:gap-[40px] self-stretch items-center">
                 <div className="flex flex-col w-full max-w-[1200px] items-start gap-[16px]  ">
                     <TrendKeywords data={dummyTrendData.data} />
                 </div>

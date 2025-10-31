@@ -64,9 +64,12 @@ const TextareaWithLimit = ({
                 } ${classOfBox ?? ''}   
             `}
         >
-            <div className={`font-caption-14m ${inputCount > limitLength ? 'text-error' : ' text-gray-600'}`}>
+            <label
+                htmlFor={id}
+                className={`font-caption-14m ${inputCount > limitLength ? 'text-error' : ' text-gray-600'}`}
+            >
                 {inputCount > limitLength ? errorMessage : title}
-            </div>
+            </label>
             <textarea
                 ref={textareaRef}
                 id={id}

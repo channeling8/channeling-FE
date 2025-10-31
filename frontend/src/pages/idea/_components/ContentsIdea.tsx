@@ -21,7 +21,7 @@ export const ContentsIdea = ({ data, isDummy = false }: IdeaDataProps & { isDumm
                     ) : (
                         <div className="space-y-6">
                             {ideas.map((idea, index) => (
-                                <IdeaBox key={index} idea={idea} isDummy={isDummy} />
+                                <IdeaBox key={`${idea.ideaId}-${index}`} idea={idea} isDummy={isDummy} />
                             ))}
                         </div>
                     )}
@@ -53,8 +53,8 @@ const IdeaBox = memo(({ idea, isDummy = false }: { idea: Idea; isDummy?: boolean
         try {
             // hashTag가 문자열로 오는 경우 배열로 파싱
             return Array.isArray(idea.hashTag) ? idea.hashTag : JSON.parse(idea.hashTag)
-        } catch {
-            alert('태그 형식 오류로 태그를 표시하지 못했습니다.')
+        } catch (error) {
+            console.error('태그 형식 오류로 태그를 표시하지 못했습니다.', error)
             return []
         }
     }, [idea.hashTag])
@@ -73,8 +73,8 @@ const IdeaBox = memo(({ idea, isDummy = false }: { idea: Idea; isDummy?: boolean
             </div>
             <p className="min-h-[calc(1em*1.5*2)] line-clamp-2 font-body-18r text-gray-600">{idea.content}</p>
             <div className="flex flex-row flex-wrap gap-2">
-                {Object.values(parsedHashTags).map((tag, index) => (
-                    <p key={index} className="px-2 py-1 rounded-xs bg-primary-opacity50 font-body-16m">
+                {parsedHashTags.map((tag, index) => (
+                    <p key={`${tag}-${index}`} className="px-2 py-1 rounded-xs bg-primary-opacity50 font-body-16m">
                         #{tag}
                     </p>
                 ))}

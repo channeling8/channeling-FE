@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Info from '../../../assets/icons/info.svg?react'
 import Ideatooltip from '../../../assets/icons/ideatootltip.svg?react'
+import Ideatooltip_mobile from '../../../assets/icons/ideatooltip_mobile.svg?react'
 import DropdownOpen from '../../../assets/icons/dropdown_open.svg?react'
 import DropdownClose from '../../../assets/icons/dropdown_close.svg?react'
 import TextareaWithLimit from './TextareaWithLimit'
@@ -20,22 +21,30 @@ export const GeneratingIdea = () => {
         setIsTooltipOpen((prev) => !prev)
     }
 
-    const handleOptionClick = (option: string) => {
+    const handleOptionClick = (e: React.MouseEvent<HTMLDivElement>, option: string) => {
+        e.stopPropagation()
         setSelectedOption(option)
-        setIsDropdownOpen(true)
+        setIsDropdownOpen(false)
     }
+
+    const dropdownOptions = ['선택없음', '숏폼 (3분 미만)', '롱폼 (3분 이상)']
 
     return (
         <>
             <div className="flex justify-center items-center gap-2 relative">
                 <div className="font-title-20b text-gray-900">콘텐츠 아이디어 생성</div>
                 <Info className="justify-start" onClick={handleClick} />
-                {isTooltipOpen && <Ideatooltip className="absolute -right-[357px] -bottom-[19px]" />}
+                {isTooltipOpen && (
+                    <>
+                        <Ideatooltip className=" absolute -right-[357px] -bottom-[19px] hidden mobile:block" />
+                        <Ideatooltip_mobile className="absolute -right-[93px] -bottom-[84px] block mobile:hidden" />
+                    </>
+                )}
             </div>
             <div className="flex flex-col w-full p-4 items-stretch gap-4 rounded-2xl border-solid border border-gray-200 bg-surface-elevate-l1">
                 <div className="grid w-full desktop:grid-cols-2 grid-cols-1 gap-4 items-center">
                     <TextareaWithLimit
-                        id=""
+                        id="keyword-input"
                         value={keyword}
                         onChange={(value) => setKeyword(value)}
                         title="키워드"
@@ -66,24 +75,28 @@ export const GeneratingIdea = () => {
                                 <>
                                     <DropdownOpen className="cursor-pointer" />
                                     <div className="flex flex-col w-full absolute -bottom-45 -left-0">
-                                        <div
-                                            className="flex w-full p-4 flex-col justify-center items-start gap-2 border border-gray-400 bg-gray-300 hover:bg-gray-200 rounded-t-lg font-body-16r cursor-pointer"
-                                            onClick={() => handleOptionClick('선택없음')}
-                                        >
-                                            선택없음
-                                        </div>
-                                        <div
-                                            className="flex w-full p-4 flex-col justify-center items-start gap-2 border-x border-gray-400 bg-gray-300 hover:bg-gray-200 font-body-16r cursor-pointer"
-                                            onClick={() => handleOptionClick('숏폼 (3분 미만)')}
-                                        >
-                                            숏폼 (3분 미만)
-                                        </div>
-                                        <div
-                                            className="flex w-full p-4 flex-col justify-center items-start gap-2 border border-gray-400 bg-gray-300  hover:bg-gray-200 rounded-b-lg font-body-16r cursor-pointer"
-                                            onClick={() => handleOptionClick('롱폼 (3분 이상)')}
-                                        >
-                                            롱폼 (3분 이상)
-                                        </div>
+                                        {dropdownOptions.map((option, index) => {
+                                            const baseStyle =
+                                                'flex w-full p-4 flex-col justify-center items-start gap-2 bg-gray-300 hover:bg-gray-200 font-body-16r cursor-pointer'
+                                            let conditionalStyle = ''
+
+                                            if (index === 0) {
+                                                conditionalStyle = 'border border-gray-400 rounded-t-lg'
+                                            } else if (index === dropdownOptions.length - 1) {
+                                                conditionalStyle = 'border border-gray-400 rounded-b-lg'
+                                            } else {
+                                                conditionalStyle = 'border border-gray-400'
+                                            }
+                                            return (
+                                                <div
+                                                    key={option}
+                                                    className={`${baseStyle} ${conditionalStyle}`}
+                                                    onClick={(e) => handleOptionClick(e, option)}
+                                                >
+                                                    {option}
+                                                </div>
+                                            )
+                                        })}
                                     </div>
                                 </>
                             )}
@@ -92,7 +105,7 @@ export const GeneratingIdea = () => {
                 </div>
 
                 <TextareaWithLimit
-                    id=""
+                    id="additional-info-input"
                     value={additionalInfo}
                     onChange={(value) => setAdditionalInfo(value)}
                     title="추가 입력 사항"
