@@ -1,4 +1,4 @@
-import { memo, useMemo, useState } from 'react'
+import { memo, useMemo } from 'react'
 import { TitledSection } from '../../../components/TitledSection'
 import BookmarkInactive from '../../../assets/icons/bookmark.svg?react'
 import BookmarkActive from '../../../assets/icons/bookmark_active.svg?react'
@@ -10,7 +10,7 @@ import { Skeleton } from './GeneratingSkeleton'
 
 export const ContentsIdea = ({ data, isDummy = false }: IdeaDataProps & { isDummy?: boolean }) => {
     const { idea: ideas } = data
-    const [isIdeaGenerating, _setIsIdeaGenerating] = useState(false)
+    const isIdeaGenerating = false
 
     return (
         <>

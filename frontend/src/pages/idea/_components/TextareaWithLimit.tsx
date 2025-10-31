@@ -28,7 +28,7 @@ const TextareaWithLimit = ({
     const [isFocused, setIsFocused] = useState(false)
     const textareaRef = useRef<HTMLTextAreaElement>(null)
 
-    let [inputCount, setInputCount] = useState(0)
+    const [inputCount, setInputCount] = useState(0)
 
     const onInputHandler = (value: string) => {
         setInputCount(value.length)
