@@ -10,11 +10,7 @@ import { Skeleton } from './GeneratingSkeleton'
 
 export const ContentsIdea = ({ data, isDummy = false }: IdeaDataProps & { isDummy?: boolean }) => {
     const { idea: ideas } = data
-    const [isIdeaGenerating, setIsIdeaGenerating] = useState(false)
-
-    // const handleClick = () => {
-    //     setIsIdeaGenerating((prev) => !prev)
-    // }
+    const [isIdeaGenerating, _setIsIdeaGenerating] = useState(false)
 
     return (
         <>
