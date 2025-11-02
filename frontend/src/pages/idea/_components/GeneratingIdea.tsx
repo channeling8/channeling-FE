@@ -33,17 +33,19 @@ export const GeneratingIdea = () => {
 
     return (
         <section className="w-full flex flex-col gap-4">
-            <div className="flex items-center place-content-start gap-2 relative">
+            <div className="flex items-center place-content-start gap-2">
                 <h2 aria-labelledby={headingId} className="font-title-20b text-gray-900 ">
                     콘텐츠 아이디어 생성
                 </h2>
-                <Info className="justify-start cursor-pointer" onClick={handleClick} />
-                {isTooltipOpen && (
-                    <>
-                        <Ideatooltip className=" absolute -right-[357px] -bottom-[19px] hidden tablet:block" />
-                        <IdeatooltipMobile className="absolute -right-[93px] -bottom-[84px] block tablet:hidden" />
-                    </>
-                )}
+                <div className="relative">
+                    <Info className="cursor-pointer" onClick={handleClick} />
+                    {isTooltipOpen && (
+                        <>
+                            <Ideatooltip className="hidden tablet:block absolute left-full top-1/2 -translate-y-5 ml-2" />
+                            <IdeatooltipMobile className="block tablet:hidden absolute left-full -translate-x-[5.563rem] top-full mt-2" />
+                        </>
+                    )}
+                </div>
             </div>
             <div className="flex flex-col p-4 items-stretch gap-4 rounded-2xl border-solid border border-gray-200 bg-surface-elevate-l1">
                 <div className="grid desktop:grid-cols-2 grid-cols-1 gap-4 items-center">
