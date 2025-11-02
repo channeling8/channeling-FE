@@ -8,7 +8,6 @@ interface TextareaWithLimitProps {
     placeholder?: string
     initialRows?: number // row 개수로 textarea 박스의 초기 높이를 지정할 수 있습니다. 디폴트는 1
     disabled?: boolean
-    classOfBox?: string
     classOfTextarea?: string
     limitLength?: number
 }
@@ -22,7 +21,6 @@ const TextareaWithLimit = ({
     initialRows = 1,
     disabled = false,
     limitLength = 25,
-    classOfBox,
     classOfTextarea,
 }: PropsWithChildren<TextareaWithLimitProps>) => {
     const [isFocused, setIsFocused] = useState(false)
@@ -61,7 +59,7 @@ const TextareaWithLimit = ({
             className={`flex flex-col p-4 gap-2 items-start
                 border bg-surface-elevate-l2 rounded-lg   ${
                     inputCount > limitLength ? 'border-error' : isFocused ? 'border-gray-400' : 'border-transparent'
-                } ${classOfBox ?? ''}   
+                } 
             `}
         >
             <label
