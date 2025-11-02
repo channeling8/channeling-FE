@@ -6,7 +6,7 @@ import { COMMENT_TYPE, type Comment, type CommentType } from '../../../../types/
 import { useParams } from 'react-router-dom'
 import type { OverviewDataProps } from '../../../../types/report/all'
 import { CommentSkeleton } from './CommentSkeleton'
-import useGetDummyComments from '../../../../hooks/report/useGetDummyReport'
+import { useGetDummyComments } from '../../../../hooks/report'
 
 const Comments = ({ comments }: { comments: Comment[] | undefined }) => {
     if (!comments || comments.length === 0)
@@ -33,13 +33,13 @@ export const CommentFeedback = ({ data, isDummy }: OverviewDataProps & { isDummy
 
     const { data: realData, isLoading: isRealLoading } = useGetReportComments({
         reportId,
-        type: activeTab,
+        commentType: activeTab,
         enabled: !isDummy,
     })
 
     const { data: dummyData, isLoading: isDummyLoading } = useGetDummyComments({
         reportId,
-        type: activeTab,
+        commentType: activeTab,
         enabled: isDummy,
     })
 

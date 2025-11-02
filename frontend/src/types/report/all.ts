@@ -1,7 +1,7 @@
 import type { CommonResponse } from '../common'
 import type { Idea } from '../idea'
 
-// ✅ 영상 정보 조회 요청 타입
+// 영상 정보 조회 요청 타입
 export type VideoDataDto = {
     videoId: number | undefined
 }
@@ -21,9 +21,10 @@ export type VideoData = {
 // 영상 정보 조회 응답 타입
 export type ResponseVideoData = CommonResponse<VideoData>
 
-// 리포트 조회(개요/분석/아이디어) 요청 타입
+// 리포트 조회 (개요/분석) 요청 타입
 export type GetReportDto = {
     reportId: number
+    section?: 'OVERVIEW' | 'ANALYSIS'
 }
 
 export type Trend = {
@@ -34,7 +35,7 @@ export type Trend = {
     createdAt: Date
 }
 
-// ✅ 리포트 개요 데이터 타입
+// 리포트 개요 데이터 타입
 export type ReportOverview = {
     reportId: number
     view: number
@@ -56,14 +57,14 @@ export type ReportOverview = {
     negativeComment: number
 }
 
-// ✅ 리포트 분석 데이터 타입
+// 리포트 분석 데이터 타입
 export type ReportAnalysis = {
     reportId: number
     leaveAnalyze: string
     optimization: string
 }
 
-// ✅ 리포트 아이디어 데이터 타입
+// 리포트 아이디어 데이터 타입
 export type ReportIdea = {
     reportId: number
     idea: Idea[]
@@ -75,14 +76,14 @@ export type ResponseReportOverview = CommonResponse<ReportOverview>
 export type ResponseReportAnalysis = CommonResponse<ReportAnalysis>
 export type ResponseReportIdea = CommonResponse<ReportIdea>
 
-// ⭐️ 리포트 컴포넌트 분리 데이터 props 타입
+// 리포트 컴포넌트 분리 데이터 props 타입
 export type OverviewDataProps = { data: ReportOverview }
 export type AnalysisDataProps = { data: ReportAnalysis }
 export type IdeaDataProps = { data: ReportIdea }
 
 export type VideoType = 'LONG' | 'SHORTS'
 
-// ✅ 내 채널 리포트 조회 요청 타입
+// 내 채널 리포트 조회 요청 타입
 export type MyReportsDto = {
     channelId: number
     type: VideoType
@@ -115,7 +116,7 @@ export type MyReports = {
 
 export type ResponseMyReports = CommonResponse<MyReports>
 
-// ✅ 리포트 삭제 요청 타입
+// 리포트 삭제 요청 타입
 export type DeleteMyReport = {
     reportId: number
 }

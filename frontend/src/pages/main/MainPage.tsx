@@ -2,7 +2,7 @@ import { Footer } from '../../layouts/_components/Footer'
 import { useAuthStore } from '../../stores/authStore'
 import Metadata from '../../components/Metadata'
 import { META_KEY } from '../../constants/metaConfig'
-import { adaptVideolist } from '../../utils/adapters'
+import { adaptVideolist } from '../../lib/mappers/main'
 import { DummyVideoRecommendation, MyVideoRecommendation, UrlInputForm } from './_components'
 import { useGetRecommendedDummyVideos, useGetRecommendedMyVideos } from '../../hooks/main'
 
@@ -43,11 +43,13 @@ export default function MainPage() {
                     <UrlInputForm />
 
                     <div className="space-y-20 tablet:space-y-10">
-                        {isAuth && normalizedMyVideos.length > 0 && (
+                        {isAuth && normalizedMyVideos && normalizedMyVideos.length > 0 && (
                             <MyVideoRecommendation label="내 영상의 개선점을 알고 싶다면" videos={normalizedMyVideos} />
                         )}
 
-                        <DummyVideoRecommendation label="인기있는 영상의 비결은?" videos={normalizedDummyVideos} />
+                        {normalizedDummyVideos && normalizedDummyVideos.length > 0 && (
+                            <DummyVideoRecommendation label="인기있는 영상의 비결은?" videos={normalizedDummyVideos} />
+                        )}
                     </div>
                 </div>
 

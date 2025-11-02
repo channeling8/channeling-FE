@@ -12,7 +12,7 @@ export type CommentTypeValue = (typeof COMMENT_TYPE)[keyof typeof COMMENT_TYPE]
 
 export type ReportCommentsDto = {
     reportId: number
-    type: CommentType
+    commentType: CommentType
 }
 
 export type Comment = {

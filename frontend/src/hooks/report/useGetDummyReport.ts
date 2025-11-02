@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
 import type { GetReportDto } from '../../types/report/all'
-import { getDummyAnalysis, getDummyComments, getDummyIdea, getDummyOverview } from '../../api/dummy'
+import { getDummyAnalysis, getDummyComments, getDummyOverview } from '../../api/dummy'
 import type { ReportCommentsDto } from '../../types/report/comment'
 
 export function useGetDummyOverview({ reportId, enabled }: GetReportDto & { enabled: boolean }) {
     return useQuery({
-        queryKey: ['dummy', 'reports', 'overviews', reportId],
+        queryKey: ['dummyReports', reportId, 'overview'],
         queryFn: () => getDummyOverview({ reportId }),
         enabled: !!reportId && enabled,
         staleTime: 1000 * 60 * 5,
@@ -16,7 +16,7 @@ export function useGetDummyOverview({ reportId, enabled }: GetReportDto & { enab
 
 export function useGetDummyAnalysis({ reportId, enabled }: GetReportDto & { enabled: boolean }) {
     return useQuery({
-        queryKey: ['dummy', 'reports', 'analysis', reportId],
+        queryKey: ['dummyReports', reportId, 'analysis'],
         queryFn: () => getDummyAnalysis({ reportId }),
         enabled: !!reportId && enabled,
         staleTime: 1000 * 60 * 5,
@@ -25,21 +25,10 @@ export function useGetDummyAnalysis({ reportId, enabled }: GetReportDto & { enab
     })
 }
 
-export function useGetDummyIdea({ reportId, enabled }: GetReportDto & { enabled: boolean }) {
+export function useGetDummyComments({ reportId, commentType, enabled }: ReportCommentsDto & { enabled: boolean }) {
     return useQuery({
-        queryKey: ['dummy', 'reports', 'ideas', reportId],
-        queryFn: () => getDummyIdea({ reportId }),
-        enabled: !!reportId && enabled,
-        staleTime: 1000 * 60 * 5,
-        gcTime: 1000 * 60 * 30,
-        select: (data) => data.result,
-    })
-}
-
-export default function useGetDummyComments({ reportId, type, enabled }: ReportCommentsDto & { enabled: boolean }) {
-    return useQuery({
-        queryKey: ['dummy', 'report', 'comments', reportId, type],
-        queryFn: () => getDummyComments({ reportId, type }),
+        queryKey: ['dummyReports', reportId, 'comments', commentType],
+        queryFn: () => getDummyComments({ reportId, commentType }),
         enabled: !!reportId && enabled,
         staleTime: 1000 * 60 * 5,
         gcTime: 1000 * 60 * 30,

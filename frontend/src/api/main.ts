@@ -1,5 +1,5 @@
 import type { RecommendedMyVideosDto, ResponseRecommendedDummyVideos, ResponseRecommendedMyVideos } from '../types/main'
-import { axiosInstance } from './axios'
+import { axiosInstance, publicAxiosInstance } from './axios'
 
 export const getRecommededMyVideos = async ({
     channelId,
@@ -13,6 +13,6 @@ export const getRecommededMyVideos = async ({
 }
 
 export const getRecommededDummyVideos = async (): Promise<ResponseRecommendedDummyVideos> => {
-    const { data } = await axiosInstance.get(`/dummies/videos`)
+    const { data } = await publicAxiosInstance.get(`/dummies/videos`)
     return data
 }

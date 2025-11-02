@@ -1,4 +1,4 @@
-import type { BriefDummyVideo, BriefVideo, NormalizedVideo } from '../types/main'
+import type { BriefDummyVideo, BriefVideo, NormalizedVideo } from '../../../types/main'
 
 /**
  * 메인 페이지 중 추천 영상 리스트의
