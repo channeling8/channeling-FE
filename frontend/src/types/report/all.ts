@@ -18,6 +18,20 @@ export type VideoData = {
     lastUpdatedDate: Date
 }
 
+export type VideoDataDummy = {
+    videoId: number
+    youtubeVideoId: string
+    videoTitle: string
+    videoThumbnailUrl: string
+    videoCategory: string
+    viewCount: number
+    videoCreatedDate: Date
+    channelName: string
+    lastUpdatedDate: Date
+}
+
+export type NormalizedVideoData = VideoDataDummy
+
 // 영상 정보 조회 응답 타입
 export type ResponseVideoData = CommonResponse<VideoData>
 

@@ -1,6 +1,12 @@
-import { publicAxiosInstance } from './axios'
-import type { GetReportDto, ResponseReportAnalysis, ResponseReportOverview } from '../types/report/all'
-import type { ReportCommentsDto, ResponseReportComments } from '../types/report/comment'
+import { axiosInstance, publicAxiosInstance } from './axios'
+import type {
+    GetReportDto,
+    ResponseReportAnalysis,
+    ResponseReportOverview,
+    ResponseVideoData,
+    VideoDataDto,
+} from '../types/report/all'
+import type { ReportDummyCommentsDto, ResponseReportComments } from '../types/report/comment'
 
 export const getDummyOverview = async ({
     reportId,
@@ -21,9 +27,14 @@ export const getDummyAnalysis = async ({
 export const getDummyComments = async ({
     reportId,
     commentType,
-}: ReportCommentsDto): Promise<ResponseReportComments> => {
+}: ReportDummyCommentsDto): Promise<ResponseReportComments> => {
     const { data } = await publicAxiosInstance.get(`/dummies/${reportId}/comments`, {
         params: { commentType },
     })
+    return data
+}
+
+export const getDummyVideoMeta = async ({ videoId }: VideoDataDto): Promise<ResponseVideoData> => {
+    const { data } = await axiosInstance.get(`/dummies/videos/${videoId}`)
     return data
 }
