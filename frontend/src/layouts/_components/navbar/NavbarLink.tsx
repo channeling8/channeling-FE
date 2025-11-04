@@ -16,7 +16,7 @@ const NavbarLinkComponent = (props: NavbarLinkProps) => {
     return (
         <NavLink to={to} end={true} className={`block ${className ?? ''}`}>
             {({ isActive }) => (
-                <div className="flex flex-row desktop:flex-col items-center px-2 py-1 gap-4 desktop:gap-2">
+                <div className="flex flex-row desktop:flex-col items-center px-2 py-1 gap-2 tablet:gap-4 desktop:gap-2">
                     <IconWrapper
                         defaultIcon={defaultIcon}
                         hoverIcon={hoverIcon}
@@ -39,7 +39,7 @@ const NavbarModalButtonComponent = (props: NavbarLinkProps) => {
 
     return (
         <button onClick={onClick} className={`block ${className ?? ''}`}>
-            <div className="flex flex-row desktop:flex-col items-center p-1 desktop:p-0 gap-3 desktop:gap-[5px] cursor-pointer">
+            <div className="flex flex-row desktop:flex-col items-center px-2 py-1 tablet:px-1 desktop:p-0 gap-2 tablet:gap-3 desktop:gap-[5px] cursor-pointer">
                 <IconWrapper
                     defaultIcon={defaultIcon}
                     hoverIcon={hoverIcon}
