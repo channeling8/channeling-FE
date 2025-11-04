@@ -37,13 +37,8 @@ export default function useRemoveIdeaBookmark() {
 
             return { previousIdeasResponse: undefined }
         },
-
-        onError: (_err, _variables, context) => {
+        onError: () => {
             alert('북마크 업데이트에 실패하였습니다')
-            // UI 원상 복구
-            if (context?.previousIdeasResponse) {
-                queryClient.setQueryData(queryKeyPrefix, context.previousIdeasResponse)
-            }
         },
         onSettled: () => {
             queryClient.invalidateQueries({ queryKey: queryKeyPrefix })
