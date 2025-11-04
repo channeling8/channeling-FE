@@ -26,7 +26,7 @@ const NavbarLinksListComponent = ({
     const label = loginButtonRef ? undefined : PLUS_LINK.label
 
     return (
-        <div className="flex flex-col justify-between items-start desktop:items-center w-full h-full">
+        <div className="flex flex-col justify-between items-start desktop:items-center w-full h-dvh">
             <div className="flex flex-col justify-center items-start desktop:items-center gap-4 desktop:gap-6">
                 <NavbarModalButton
                     {...PLUS_LINK}
@@ -42,7 +42,7 @@ const NavbarLinksListComponent = ({
                 </div>
             </div>
 
-            <div ref={loginButtonRef} className="flex w-full justify-center items-center tablet:mb-4 desktop:m-0">
+            <div ref={loginButtonRef} className="flex w-full justify-start items-center tablet:mb-4 desktop:m-0">
                 {isAuth && user ? (
                     <button
                         className="flex flex-row justify-between items-center w-full cursor-pointer"
@@ -52,7 +52,7 @@ const NavbarLinksListComponent = ({
                         <Settings className="block desktop:hidden" />
                     </button>
                 ) : (
-                    <NavbarModalButton {...LOGIN_LINK} onClick={handleLoginClick} />
+                    <NavbarModalButton {...LOGIN_LINK} onClick={handleLoginClick} variant="login" />
                 )}
             </div>
         </div>
