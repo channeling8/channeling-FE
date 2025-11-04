@@ -21,7 +21,7 @@ export type LinkItem = {
     alt: string
     label?: string
     isCircle: boolean
-    size?: 'sm' | 'md' | 'lg'
+    size?: 'xs' | 'sm' | 'md' | 'lg'
 }
 
 export const PLUS_LINK: LinkItem = {
