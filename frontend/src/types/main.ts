@@ -54,7 +54,7 @@ export type RecommendedDummyVideos = {
     hasNextPage: boolean
     totalElements: number
     totalPages: number
-    videoList: BriefVideo[]
+    videoList: BriefDummyVideo[]
 }
 
 export type ResponseRecommendedMyVideos = CommonResponse<RecommendedMyVideos>
