@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query'
-import type { GetReportDto } from '../../types/report/all'
-import { getDummyAnalysis, getDummyComments, getDummyOverview } from '../../api/dummy'
-import type { ReportCommentsDto } from '../../types/report/comment'
+import type { GetReportDto, VideoDataDto } from '../../types/report/all'
+import { getDummyAnalysis, getDummyComments, getDummyOverview, getDummyVideoMeta } from '../../api/dummy'
+import type { ReportDummyCommentsDto } from '../../types/report/comment'
 
 export function useGetDummyOverview({ reportId, enabled }: GetReportDto & { enabled: boolean }) {
     return useQuery({
-        queryKey: ['dummy', 'reports', 'overviews', reportId],
+        queryKey: ['dummyReports', reportId, 'overview'],
         queryFn: () => getDummyOverview({ reportId }),
         enabled: !!reportId && enabled,
         staleTime: 1000 * 60 * 5,
@@ -16,7 +16,7 @@ export function useGetDummyOverview({ reportId, enabled }: GetReportDto & { enab
 
 export function useGetDummyAnalysis({ reportId, enabled }: GetReportDto & { enabled: boolean }) {
     return useQuery({
-        queryKey: ['dummy', 'reports', 'analysis', reportId],
+        queryKey: ['dummyReports', reportId, 'analysis'],
         queryFn: () => getDummyAnalysis({ reportId }),
         enabled: !!reportId && enabled,
         staleTime: 1000 * 60 * 5,
@@ -25,11 +25,22 @@ export function useGetDummyAnalysis({ reportId, enabled }: GetReportDto & { enab
     })
 }
 
-export default function useGetDummyComments({ reportId, type, enabled }: ReportCommentsDto & { enabled: boolean }) {
+export function useGetDummyComments({ reportId, commentType, enabled }: ReportDummyCommentsDto & { enabled: boolean }) {
     return useQuery({
-        queryKey: ['dummy', 'report', 'comments', reportId, type],
-        queryFn: () => getDummyComments({ reportId, type }),
+        queryKey: ['dummyReports', reportId, 'comments', commentType],
+        queryFn: () => getDummyComments({ reportId, commentType }),
         enabled: !!reportId && enabled,
+        staleTime: 1000 * 60 * 5,
+        gcTime: 1000 * 60 * 30,
+        select: (data) => data.result,
+    })
+}
+
+export function useGetDummyVideoMeta({ videoId, enabled }: VideoDataDto & { enabled: boolean }) {
+    return useQuery({
+        queryKey: ['dummyReports', 'video', videoId],
+        queryFn: () => getDummyVideoMeta({ videoId }),
+        enabled: !!videoId && enabled,
         staleTime: 1000 * 60 * 5,
         gcTime: 1000 * 60 * 30,
         select: (data) => data.result,

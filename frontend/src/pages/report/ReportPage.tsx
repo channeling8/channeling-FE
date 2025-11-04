@@ -11,6 +11,8 @@ import useGetVideoData from '../../hooks/report/useGetVideoData'
 import { useReportStore } from '../../stores/reportStore'
 import { useGetInitialReportStatus, usePollReportStatus } from '../../hooks/report/usePollReportStatus'
 import { META_KEY } from '../../constants/metaConfig'
+import type { NormalizedVideoData } from '../../types/report/all'
+import { adaptVideoMeta } from '../../lib/mappers/report'
 
 export default function ReportPage() {
     const navigate = useNavigate()
@@ -59,6 +61,9 @@ export default function ReportPage() {
     const [isOpenUpdateModal, setIsOpenUpdateModal] = useState(false)
 
     const { data: videoData, isPending } = useGetVideoData(videoId)
+    const normalizedVideoData: NormalizedVideoData | undefined = videoData
+        ? adaptVideoMeta(videoData, false)
+        : undefined
 
     // 영상 정보 조회가 성공하면 로딩 스피너를 종료
     useEffect(() => {
@@ -70,10 +75,12 @@ export default function ReportPage() {
 
     return (
         <article>
-            {videoData && <Metadata metaKey={META_KEY.REPORT} vars={{ '영상 제목': videoData.videoTitle }} />}
+            {normalizedVideoData && (
+                <Metadata metaKey={META_KEY.REPORT} vars={{ '영상 제목': normalizedVideoData.videoTitle }} />
+            )}
 
             <div className="px-6 tablet:px-[76px] py-10 desktop:py-20 space-y-10">
-                {isPending ? <VideoSummarySkeleton /> : <VideoSummary data={videoData} />}
+                {isPending ? <VideoSummarySkeleton /> : <VideoSummary data={normalizedVideoData} />}
                 <Tabs tabs={TABS} activeTab={activeTab} onChangeTab={setActiveTab} />
             </div>
 
