@@ -11,10 +11,10 @@ export const MarkdownBox = ({ content }: MarkdownBoxProps) => {
         <div
             className="prose prose-invert max-w-none
                 prose-headings:mt-4
-                prose-h1:font-title-20b prose-h1:text-gray-900
-                prose-h2:font-title-20b prose-h2:text-gray-900
-                prose-h3:font-title-18b prose-h3:text-gray-900
-                prose-h4:font-body-16b prose-h4:text-gray-900
+                prose-h1:text-[20px] prose-h1:leading-[150%] prose-h1:tracking-[-0.4px] prose-h1:font-bold prose-h1:text-gray-900
+                prose-h2:text-[18px] prose-h2:leading-[150%] prose-h2:tracking-[-0.4px] prose-h2:font-bold prose-h2:text-gray-900
+                prose-h3:text-[16px] prose-h3:leading-[150%] prose-h3:tracking-[-0.4px] prose-h3:font-bold prose-h3:text-gray-900
+                prose-h4:text-[16px] prose-h4:leading-[150%] prose-h4:tracking-[-0.4px] prose-h4:font-bold prose-h4:text-gray-900
                 prose-p:font-body-16r prose-p:text-gray-900
                 prose-a:text-primary-600 prose-a:hover:underline
 
